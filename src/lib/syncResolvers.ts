@@ -49,8 +49,8 @@ export async function syncResolvers({ db, node, contract }: { db: Database, node
             if (event?.name === 'NewResolver') {
                 const log = event.args;
                 spinner.text = `Resolver update for: ${log.node}`;
-                db.prepare('INSERT OR REPLACE INTO nodeResolvers (node, resolverAddress, blockHeight) VALUES (:node, :resolver, :blockNumber)').run({ node: log.node, resolver: log.resolver, blockNumber: rawEvent.meta.blockNumber });
-                db.prepare('INSERT OR REPLACE INTO nodes (node, resolverAddress, blockHeight) VALUES (:node, :resolver, :blockNumber)').run({ node: log.node, resolver: log.resolver, blockNumber: rawEvent.meta.blockNumber });
+                db.prepare('INSERT OR REPLACE INTO nodeResolvers (node, resolverAddress, blockHeight) VALUES (:node, :resolver, :blockNumber)').run({ node: log.node, resolver: log.resolver.toLowerCase(), blockNumber: rawEvent.meta.blockNumber });
+                db.prepare('INSERT OR REPLACE INTO nodes (node, resolverAddress, blockHeight) VALUES (:node, :resolver, :blockNumber)').run({ node: log.node, resolver: log.resolver.toLowerCase(), blockNumber: rawEvent.meta.blockNumber });
             }
         }
 

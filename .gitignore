@@ -12,4 +12,4 @@
 
 node_modules
 dist
-index.db
+index.db*
